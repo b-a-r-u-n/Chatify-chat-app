@@ -16,4 +16,9 @@ app.use(express.urlencoded({
 }))
 app.use(cookieParser());
 
+//Routes
+import authRoutes from './Routes/auth.route.js';
+
+app.use('/api/v1/auth', authRoutes);
+
 export default app;
