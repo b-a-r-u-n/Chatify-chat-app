@@ -17,8 +17,12 @@ app.use(express.urlencoded({
 app.use(cookieParser());
 
 //Routes
-import authRoutes from './Routes/auth.route.js';
+import authRoutes from './Routes/auth.Route.js';
+import userRoutes from './Routes/user.route.js';
+import messageRoutes from './Routes/message.route.js';
 
 app.use('/api/v1/auth', authRoutes);
+app.use('/api/v1/user', userRoutes);
+app.use('/api/v1/message', messageRoutes);
 
 export default app;
