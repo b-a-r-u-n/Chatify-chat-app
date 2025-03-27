@@ -32,7 +32,7 @@ const Navbar = () => {
     // })
     try {
       const res = await dispatch(handleLogout());
-      if(res.payload?.success === false || res.payload.success === 'false'){
+      if(res.payload?.success === true || res.payload.success === 'true'){
         toast.success(`${res.payload?.message}`);
         navigate('/login', { replace: true });
         return;
@@ -70,14 +70,18 @@ const Navbar = () => {
         {
           authUser && 
           <div className="icons">
-            <button className="setting-icon">
-              <Settings />
-              <p>Settings</p>
-            </button>
-            <button className="profile-icon">
-              <User />
-              <p>Profile</p>
-            </button>
+            <Link to='/setting'>
+              <button className="setting-icon">
+                <Settings />
+                <p>Settings</p>
+              </button>
+            </Link>
+            <Link to='/profile'>
+              <button className="profile-icon">
+                <User />
+                <p>Profile</p>
+              </button>
+            </Link>
             <button className="logout-icon" onClick={handleLogoutButton}>
               <LogOut />
               <p>Logout</p>

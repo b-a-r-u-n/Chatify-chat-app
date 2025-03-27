@@ -22,7 +22,7 @@ function App() {
 
   useEffect(() => {
     dispatch(checkAuth());
-  },[dispatch, authUser])
+  },[dispatch])
 
   if(isCheckingAuth && !authUser){
     return (

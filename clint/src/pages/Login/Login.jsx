@@ -41,9 +41,7 @@ const Login = () => {
     const checkValidate = validateForm();
     if(checkValidate){
       dispatch(handleLogin(formData))
-      .then((res) => {
-        console.log(res);
-        
+      .then((res) => {        
         if(res.payload?.success === true || res.payload?.success === 'true'){
           dispatch(checkAuth());
           navigate('/');
