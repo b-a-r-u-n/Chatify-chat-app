@@ -1,0 +1,24 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Remove default password toggle (Edge, Chrome, Safari) */
+input[type="password"]::-ms-reveal,
+input[type="password"]::-ms-clear,
+input[type="password"]::-webkit-contacts-auto-fill-button,
+input[type="password"]::-webkit-credentials-auto-fill-button {
+  display: none !important;
+}
+
+/* Prevent autofill UI issues */
+input:-webkit-autofill {
+  -webkit-text-security: disc !important;
+  background-color: transparent !important;
+  color: inherit !important;
+}
+
+::-webkit-scrollbar{
+    display: none;
+}

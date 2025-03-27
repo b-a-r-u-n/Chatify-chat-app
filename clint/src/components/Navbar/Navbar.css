@@ -1,0 +1,41 @@
+.nav{
+    height: 10vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2.5vw;
+}
+
+.logo{
+    display: flex;
+    align-items: center;
+}
+
+.logo > img{
+    height: 7vh;
+}
+
+.logo > h1{
+    font-weight: 600;
+}
+
+.icons{
+    display: flex;
+    gap: 1rem;
+}
+
+.setting-icon, .profile-icon, .logout-icon{
+    display: flex;
+    gap: 0.5rem;
+    cursor: pointer;
+}
+
+.setting-icon>p, .profile-icon>p, .logout-icon>p{
+    font-weight: 600;
+}
+
+@media (max-width: 480px){
+    .setting-icon>p, .profile-icon>p, .logout-icon>p{
+        display: none;
+    }
+}

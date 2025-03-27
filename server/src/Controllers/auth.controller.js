@@ -78,8 +78,8 @@ const loginUser = asyncHandler(async (req, res) => {
     //localhost
     const options = {
         httpOnly: true,  // ✅ Prevents XSS attacks
-        secure: false,    // ✅ Required for `SameSite: None` (use HTTPS in production)
-        // sameSite: 'None', // ✅ Allows cross-origin requests
+        secure: true,    // ✅ Required for `SameSite: None` (use HTTPS in production)
+        sameSite: 'None', // ✅ Allows cross-origin requests
         expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000) // 7-day expiration
     };
 
@@ -110,8 +110,9 @@ const logoutUser = asyncHandler(async (req, res) => {
 
     const options = {
         httpOnly: true,  // ✅ Prevents XSS attacks
-        secure: false,    // ✅ Required for `SameSite: None` (use HTTPS in production)
-        // sameSite: 'None', // ✅ Allows cross-origin requests
+        secure: true,    // ✅ Required for `SameSite: None` (use HTTPS in production)
+        sameSite: 'None', // ✅ Allows cross-origin requests
+        expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000) // 7-day expiration
     };
 
     res
@@ -123,7 +124,7 @@ const logoutUser = asyncHandler(async (req, res) => {
     )
 })
 
-const chechAuth = asyncHandler(async (req, res) => {
+const checkAuth = asyncHandler(async (req, res) => {
     if(!req.user)
         throw new apiError(400, 'User not logged in');
 
@@ -138,5 +139,5 @@ export {
     registerUser,
     loginUser,
     logoutUser,
-    chechAuth
+    checkAuth
 }
