@@ -30,6 +30,8 @@ const Login = () => {
       toast.error('Email is required');
     else if(!formData.password.trim())
       toast.error('Password is required');
+    else if(formData.password.length < 6)
+      toast.error("Password must be at least 6 characters");
     else
       return true;
   }
@@ -38,33 +40,38 @@ const Login = () => {
     e.preventDefault();
     const checkValidate = validateForm();
     if(checkValidate){
-      // dispatch(handleLogin(formData))
-      // .then((res) => {
-      //   if(res.payload?.success === false || res.payload?.success === 'false'){
-      //     toast.error(`${res.payload?.message}`);
-      //     return;
-      //   }
-      //   console.log("login");
+      dispatch(handleLogin(formData))
+      .then((res) => {
+        console.log(res);
         
-      //   dispatch(checkAuth());
-      //   navigate('/');
-      //   toast.success(`${res.payload?.message}`)
-      // })
-      try {
-        const res = await dispatch(handleLogin(formData));
-        if(res.payload?.success === false || res.payload.success === 'false'){
-          toast.error(`${res.payload?.message}`)
+        if(res.payload?.success === true || res.payload?.success === 'true'){
+          dispatch(checkAuth());
+          navigate('/');
+          toast.success(`${res.payload?.message}`)
           return;
         }
-        // dispatch(checkAuth());
-        console.log('inside login', authUser);
         
-        toast.success(`${res.payload?.message}`);
-        navigate('/', { replace: true });
-      } catch (error) {
-        console.log(error);
-        toast.error('Something went wrong, please try again.');
-      }
+        toast.error(`${res.payload}`);
+      })
+      // try {
+      //   const res = await dispatch(handleLogin(formData));
+      //   console.log(res);
+        
+      //   if(res.payload?.success === false || res.payload.success === 'false'){
+      //     toast.error(`${res.payload}`)
+      //     console.log(res.payload);
+          
+      //     return;
+      //   }
+      //   // dispatch(checkAuth());
+      //   console.log('inside login', authUser);
+        
+      //   toast.success(`${res.payload?.message}`);
+      //   navigate('/', { replace: true });
+      // } catch (error) {
+      //   console.log(error);
+      //   toast.error('Something went wrong, please try again.');
+      // }
     }
     setFormData({
       email: '',

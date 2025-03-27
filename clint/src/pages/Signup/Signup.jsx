@@ -57,12 +57,12 @@ const Signup = () => {
       // })
       try {
         const res = await dispatch(handleSignup(formData));
-        if(res.payload?.success === false || res.payload.success === 'false'){
-          toast.error(`${res.payload?.message}`)
+        if(res.payload?.success === true || res.payload.success === 'true'){
+          toast.success(`${res.payload?.message}`);
+          navigate('/login', { replace: true });
           return;
         }
-        toast.success(`${res.payload?.message}`);
-        navigate('/login', { replace: true });
+        toast.error(`${res.payload}`);
       } catch (error) {
         console.log(error);
         toast.error('Something went wrong, please try again.');

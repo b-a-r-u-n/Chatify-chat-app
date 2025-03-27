@@ -33,13 +33,11 @@ const Navbar = () => {
     try {
       const res = await dispatch(handleLogout());
       if(res.payload?.success === false || res.payload.success === 'false'){
-        toast.error(`${res.payload?.message}`)
+        toast.success(`${res.payload?.message}`);
+        navigate('/login', { replace: true });
         return;
       }
-      // await dispatch(checkAuth());
-      console.log('inside navbar', authUser);
-      toast.success(`${res.payload?.message}`);
-      navigate('/login', { replace: true });
+      toast.error(`${res.payload}`)
     } catch (error) {
       console.log(error);
       toast.error('Something went wrong, please try again.');
