@@ -1,0 +1,153 @@
+.profile-container{
+    min-height: 90vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.profile-sub-container{
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    /* justify-content: center; */
+    align-items: center;
+    gap: 1.5rem;
+    padding: 1rem 2.5rem;
+    border-radius: 20px;
+}
+
+.profile-heading{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.profile-heading>h2{
+    font-size: 1.6rem;
+    font-weight: 600;
+}
+
+.profile-info{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.profile-image{
+    position: relative;
+}
+
+.profile-image>img{
+    height: 8rem;
+    border-radius: 50%;
+}
+
+.profile-image> button{
+    position: absolute;
+    bottom: 0;
+    right: 10px;
+    border-radius: 50%;
+    padding: 6px;
+}
+
+.profile-image> button:hover{
+    cursor: pointer;
+}
+
+.profile-info> p{
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.profile-name, .profile-email{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.profile-name> label, .profile-email> label{
+    display: flex;
+    align-items: center;
+    gap: 0.2rem;
+    font-weight: 600;
+}
+
+.profile-name>div, .profile-email>div{
+    display: flex;
+    width: 100%;
+    padding: 0.5rem;
+    font-size: large;
+    font-weight: 500;
+    border-radius: 10px;
+
+}
+
+.profile-name>div>input, .profile-email>div>input{
+    border: none;
+    outline: none;
+    width: 100%;
+}
+
+.profile-name>div>button:hover{
+    cursor: pointer;
+}
+
+.profile-sub-container> button{
+    width: 80%;
+    font-size: 1.3rem;
+    padding: 1.5rem 0;
+}
+
+.account-info{
+    padding: 0 1.3rem;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    /* align-items: center; */
+    gap: 1.2rem;
+}
+
+.account-info>h2{
+    font-size: 1.2rem;
+    font-weight: 600;
+    text-align: left;
+}
+
+.account-info>div{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+.account-info>div>p{
+    font-weight: 600;
+}
+
+.account-info >div:nth-child(2){
+    padding-bottom: 0.3rem;
+}
+
+.account-info >div:nth-child(3)> p:last-child{
+    color: #29bf12;
+}
+
+@media (max-width: 480px){
+    .profile-sub-container{
+        width: 100%;
+    }
+}
+
+@media (min-width:480px) and (max-width:768px){
+    .profile-sub-container{
+        width: 70%;
+    }
+}
+
+@media(min-width: 768px) and (max-width:1024px){
+    .profile-sub-container{
+        width: 50%;
+    }
+}
