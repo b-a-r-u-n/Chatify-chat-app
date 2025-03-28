@@ -142,7 +142,7 @@ const authSlice = createSlice({
         builder.addCase(handleLogout.fulfilled, (state, action) => {
             if(action.payload?.success === true || action.payload?.success === 'true')
                 state.authUser = null;
-            console.log('state.authUser', state.authUser);
+            // console.log('state.authUser', state.authUser);
             state.isLogout = false;
         })
         builder.addCase(handleLogout.rejected, (state, _) => {
