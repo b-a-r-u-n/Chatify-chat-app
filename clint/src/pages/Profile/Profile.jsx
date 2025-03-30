@@ -38,7 +38,6 @@ const Profile = () => {
   }
 
   const handleUpdateButton = async () => {
-    console.log('Click');
     if(!fullName.trim()){
       toast.error('Please enter your full name.')
       return;
