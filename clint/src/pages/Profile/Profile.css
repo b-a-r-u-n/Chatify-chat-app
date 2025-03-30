@@ -40,8 +40,12 @@
 }
 
 .profile-image>img{
-    height: 8rem;
+    height: 10rem;
+    width: 10rem;
     border-radius: 50%;
+    background-position: center;
+    overflow: hidden;
+    background-size: cover;
 }
 
 .profile-image> button{
@@ -99,6 +103,10 @@
     width: 80%;
     font-size: 1.3rem;
     padding: 1.5rem 0;
+}
+
+.disabled{
+    cursor: not-allowed;
 }
 
 .account-info{

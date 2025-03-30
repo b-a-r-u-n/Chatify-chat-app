@@ -83,6 +83,28 @@ export const handleLogout = createAsyncThunk('handleLogout', async (_, { rejectW
     }
 })
 
+export const handleProfileUpdate = createAsyncThunk('handleProfileUpdate', async (formData, {rejectWithValue}) => {
+    try {
+        
+        const responce = await fetch(`${import.meta.env.VITE_BASE_URL}/user/update-profile`, {
+            method: 'PUT',
+            credentials: 'include',
+            // headers: {
+            //     'Content-Type': 'application/json'
+            // },
+            // body: JSON.stringify(formData)
+            body: formData
+        })
+        const data = await responce.json();
+
+        if (!data.success) throw new Error(data.message || "Request failed");
+
+        return data;
+    } catch (error) {
+        return rejectWithValue(error?.message || "Something went wrong while updating profile");
+    }
+})
+
 const initialState = {
     authUser: null,
     isCheckingAuth: true,
@@ -90,7 +112,8 @@ const initialState = {
     isSignup: false,
     isLogin: false,
     isUpdateProfile: false,
-    isLogout: false
+    isLogout: false,
+
 }
 
 const authSlice = createSlice({
@@ -147,6 +170,20 @@ const authSlice = createSlice({
         })
         builder.addCase(handleLogout.rejected, (state, _) => {
             state.isLogout = false;
+        })
+
+        // Update Profile
+        builder.addCase(handleProfileUpdate.pending, (state) => {
+            state.isUpdateProfile = true;
+        })
+        builder.addCase(handleProfileUpdate.fulfilled, (state, action) => {
+            if(action.payload?.success === true || action.payload?.success === 'true')
+                state.authUser = action.payload?.data;
+            
+            state.isUpdateProfile = false;
+        })
+        builder.addCase(handleProfileUpdate.rejected, (state, _) => {
+            state.isUpdateProfile = false;
         })
     }
 })
