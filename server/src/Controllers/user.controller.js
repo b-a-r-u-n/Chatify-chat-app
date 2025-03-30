@@ -2,7 +2,7 @@ import { User } from "../Models/user.model.js";
 import { apiError } from "../Utils/apiError.util.js";
 import { apiResponce } from "../Utils/apiResponce.util.js";
 import { asyncHandler } from "../Utils/asyncHandler.util.js";
-import { uploadOnCloudinary } from "../Utils/cloudinary.util.js";
+import { deleteFromCloudinary, uploadOnCloudinary } from "../Utils/cloudinary.util.js";
 
 const getAllUsers = asyncHandler(async (req, res) => {
     const users = await User.find({
@@ -46,6 +46,8 @@ const updateProfile = asyncHandler(async (req, res) => {
     if(!user)
         throw new apiError(500, 'Error updating profile');
 
+    deleteFromCloudinary(req.user?.profileImage);
+
     res
     .status(200)
     .json(
@@ -57,7 +59,8 @@ const deleteUser = asyncHandler(async (req, res) => {
     const user = await User.findByIdAndDelete(req.user?._id);
     if(!user)
         throw new apiError(500, 'Error deleting profile');
-
+    deleteFromCloudinary(req.user?.profileImage);
+    
     res
     .status(200)
     .json(

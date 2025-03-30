@@ -1,6 +1,7 @@
 import { v2 as cloudinary } from 'cloudinary';
 import fs from 'fs';
 import { apiError } from './apiError.util.js';
+import { log } from 'console';
 
 cloudinary.config({
     cloud_name: process.env.CLOUDINARY_CLOUD_NAME, 
@@ -22,7 +23,7 @@ const uploadOnCloudinary = async (localFilePath) => {
                 { fetch_format: "auto", quality: "auto:low" }  // Ensures better optimization
             ]
         })
-        
+        fs.unlinkSync(localFilePath);
         return result;
     } catch (error) {
         fs.unlinkSync(localFilePath);
@@ -35,7 +36,10 @@ const deleteFromCloudinary = async (url) => {
     try {
         if(!url)
             throw new apiError(400, 'No file found');
-        console.log('url', url);
+        const publicId = url.split('/').pop().split('.')[0];
+        const res = await cloudinary.uploader.destroy(`chat-app/${publicId}`);
+        // console.log(publicId);
+        // console.log(res);
     } catch (error) {
         console.error(error);
     }
