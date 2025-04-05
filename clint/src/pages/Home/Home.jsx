@@ -1,9 +1,27 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import {MessageSquare, Users} from 'lucide-react'
-import { UserCard } from '../../components'
+import { HomeSkeleton, UserCard } from '../../components'
 import './Home.css'
+import { useDispatch, useSelector } from 'react-redux'
+import { getAllUsers } from '../../Features/messageSlice'
 
 const Home = () => {
+
+  const dispatch = useDispatch();
+
+  const users = useSelector(state => state.message.users);
+  const isUserLoading = useSelector(state => state.message.isUserLoading);
+  const selectedUser = useSelector(state => state.message.selectedUser);
+
+  useEffect(() => {
+    dispatch(getAllUsers());
+  }, [])
+  let x = true;
+
+  if(isUserLoading){
+    return <HomeSkeleton />
+  }
+
   return (
     <>
       <div className="home">
@@ -28,22 +46,29 @@ const Home = () => {
             </div>
             <div className="left-body">
             {
-              Array.from(Array(10), () => {
-                return (
-                  <UserCard />
-                )
+              users.map((user) => {
+                return <UserCard key={user._id} user={user}/>
               })
             }
             </div>
           </div>
           <div className="rightside">
-            <div className="right-side-container">
-              <div className="right-side-logo animate-bounce">
-                <MessageSquare size={40} />
-              </div>
-              <h1>Welcome to Chatify</h1>
-              <p>Select a conversation from the sidebar to start chatting</p>
-            </div>
+            {
+              selectedUser ?
+              (
+                <div></div>
+              )
+              :
+              (
+                <div className="right-side-container">
+                  <div className="right-side-logo animate-bounce">
+                    <MessageSquare size={40} />
+                  </div>
+                  <h1>Welcome to Chatify</h1>
+                  <p>Select a conversation from the sidebar to start chatting</p>
+                </div>
+              )
+            }
           </div>
         </div>
       </div>
