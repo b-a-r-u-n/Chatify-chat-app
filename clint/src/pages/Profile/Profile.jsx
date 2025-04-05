@@ -25,7 +25,7 @@ const Profile = () => {
   const [buttonDisabled, setButtonDisabled] = useState(true);
 
   useEffect(() => {
-    if(profileImagePreview || fullName.trim() !== authUser.fullName.trim()){
+    if(profileImagePreview || fullName.trim() !== authUser?.fullName.trim()){
       setButtonDisabled(false);
     }
   }, [profileImage, profileImagePreview, fullName])
@@ -82,7 +82,7 @@ const Profile = () => {
           </div>
           <div className="profile-info">
             <div className="profile-image">
-              <img src={profileImagePreview || authUser.profileImage || image} alt="" loading='lazy'/>
+              <img src={profileImagePreview || authUser?.profileImage || image} alt="" loading='lazy'/>
               <input 
                 type="file" 
                 name="profileImage" 
@@ -140,7 +140,7 @@ const Profile = () => {
                 type="text" 
                 name="" 
                 disabled={true}
-                value={authUser.email}
+                value={authUser?.email}
               />
             </div>
           </div>
@@ -168,7 +168,7 @@ const Profile = () => {
               }}
             >
               <p>Member Since</p>
-              <p>{new Date(authUser.createdAt).toLocaleDateString('en-CA')}</p>
+              <p>{new Date(authUser?.createdAt).toLocaleDateString('en-CA')}</p>
             </div>
             <div>
               <p>Account Status</p>
