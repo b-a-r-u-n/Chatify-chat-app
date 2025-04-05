@@ -22,7 +22,7 @@ function App() {
 
   useEffect(() => {
     dispatch(checkAuth());
-  },[dispatch])
+  },[])
 
   if(isCheckingAuth && !authUser){
     return (
@@ -55,8 +55,8 @@ function App() {
         },
         {
           path: 'profile',
-          // element: authUser ? <Profile /> : <Navigate to='/login' />
-          element: <Profile />
+          element: authUser ? <Profile /> : <Navigate to='/login' />
+          // element: <Profile />
         }
       ]
     }

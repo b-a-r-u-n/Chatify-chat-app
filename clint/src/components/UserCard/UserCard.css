@@ -1,0 +1,27 @@
+.user-card{
+    display: flex;
+    gap: 1rem;
+    padding: 1rem 0.5rem;
+    border-radius: 15px;
+}
+
+.user-card:hover{
+    cursor: pointer;
+}
+
+.user-card-image>img{
+    height: 3rem;
+    width: 3rem;
+    border-radius: 50%;
+}
+
+.user-card-details>h2{
+    font-size: large;
+    font-weight: 600;
+    
+}
+
+.user-card-details>p{
+    font-size: small;
+    font-weight: 600;
+}
