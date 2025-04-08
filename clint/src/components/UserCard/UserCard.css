@@ -17,6 +17,13 @@
     background-size: cover;
 }
 
+.user-card-details{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.3rem;
+}
+
 .user-card-details>h2{
     font-size: large;
     font-weight: 600;

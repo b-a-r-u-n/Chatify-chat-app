@@ -24,7 +24,7 @@ const updateProfile = asyncHandler(async (req, res) => {
     let imageLocalPath;
     let profileImageUrl;
     if(req.file){
-        imageLocalPath = req.file.path;
+        imageLocalPath = req.file?.path;
         
         profileImageUrl = await uploadOnCloudinary(imageLocalPath);
         if(!profileImageUrl)

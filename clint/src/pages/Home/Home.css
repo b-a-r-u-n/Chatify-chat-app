@@ -52,6 +52,10 @@
     /* gap: 0.5rem; */
 }
 
+.left-body>button{
+    border-radius: 15px;
+}
+
 .rightside{
     width: 70%;
     display: flex;

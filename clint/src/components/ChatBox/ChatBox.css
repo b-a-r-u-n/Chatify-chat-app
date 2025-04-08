@@ -1,0 +1,112 @@
+.chat-box{
+    height: 100%;
+    width: 100%;
+    border-radius: 15px;
+    display: grid;
+    grid-template-rows: 10vh auto 7vh;
+}
+
+.chat-box-top{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0 1rem;
+}
+
+.chat-box-body{
+    background-color: var(--color-base-100);
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    border-bottom: 2px solid var(--color-base-300);
+    border-top: 2px solid var(--color-base-300);
+    padding: 0.5rem 1rem;
+    overflow-y: scroll;
+    scrollbar-width: 2px;
+    -ms-overflow-style: none;
+}
+
+.chat-box-body>div>.chat-message{
+    min-width: 5px;
+    max-width: 50%;
+    width: max-content;
+    padding: 0.5rem;
+    font-weight: 700;
+
+    line-height: normal;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.chat-profile{
+    display: flex;
+    gap: 0.5rem;
+}
+
+.profile-right{
+    flex-direction: row-reverse;
+}
+
+.chat-box-body>div>.chat-message>span{
+    font-size: small;
+    font-weight: 500;
+}
+
+.chat-box-body>div>.chat-message>img{
+    max-height: 50vh;
+    min-height: 10vh;
+    min-width: 10%;
+    max-width: 80%;
+}
+
+.chat-message-left{
+    background-color: var(--color-base-200);
+    border-radius: 0 10px 5px 5px;
+}
+
+.chat-message-right{
+    background-color: var(--color-primary);
+    color: var(--color-primary-content);
+    align-self: flex-end;
+    border-radius: 10px 0 5px 5px;
+}
+
+.chat-box-bottom{
+    padding: 0 1rem;
+    display: flex;
+    position: relative;
+}
+
+.chat-box-bottom>input{
+    display: none;
+}
+
+.chat-box-bottom>.input-image-preview{
+    height: 10rem;
+    background-color: aqua;
+    position: absolute;
+    top: -10rem;
+    max-width: 50%;
+}
+
+.chat-box-bottom>.input-image-preview>img{
+    max-width: 100%;
+    height: 10rem;
+}
+
+.chat-box-bottom>.input-image-preview>button{
+    position: absolute;
+    top: 0.1rem;
+    right: 0.1rem;
+}
+
+.chat-box-bottom>.input-image-preview>button:hover{
+    cursor: pointer;
+}
+
+.chat-box-bottom>button:hover{
+    cursor: pointer;
+}
+
+

@@ -28,7 +28,7 @@ const Setting = () => {
               {
                 THEMES.map((THEME) => {
                   return (
-                    <div key={nanoid}>
+                    <div key={nanoid()}>
                       <button
                         className="border-4 border-natural bg-base-200"
                         data-theme={THEME}
@@ -63,7 +63,10 @@ const Setting = () => {
                 {
                   previewMessage.map((message) => {
                     return (
-                        <div className={`preview-message ${message.isSent ? 'preview-message-right bg-primary text-primary-content' : 'preview-message-left bg-base-200'}`}>
+                        <div 
+                          key={message.id}
+                          className={`preview-message ${message.isSent ? 'preview-message-right bg-primary text-primary-content' : 'preview-message-left bg-base-200'}`}
+                        >
                           <p>{message.content}</p>
                           <label className={`${message.isSent? 'text-primary-content/70' : 'text-base-content/70'}`}>12.00 PM</label>
                         </div>

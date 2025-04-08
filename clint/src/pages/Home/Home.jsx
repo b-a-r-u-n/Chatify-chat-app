@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react'
 import {MessageSquare, Users} from 'lucide-react'
-import { HomeSkeleton, UserCard } from '../../components'
+import { ChatBox, HomeSkeleton, UserCard } from '../../components'
 import './Home.css'
 import { useDispatch, useSelector } from 'react-redux'
-import { getAllUsers } from '../../Features/messageSlice'
+import { getAllUsers, selectUser } from '../../Features/messageSlice'
 
 const Home = () => {
 
@@ -16,10 +16,13 @@ const Home = () => {
   useEffect(() => {
     dispatch(getAllUsers());
   }, [])
-  let x = true;
 
   if(isUserLoading){
     return <HomeSkeleton />
+  }
+
+  const handleClick = (user) => {
+    dispatch(selectUser(user));
   }
 
   return (
@@ -47,7 +50,15 @@ const Home = () => {
             <div className="left-body">
             {
               users.map((user) => {
-                return <UserCard key={user._id} user={user}/>
+                return (
+                  <button 
+                    key={user._id} 
+                    onClick={() => handleClick(user)}
+                    className={`${selectedUser?._id === user._id && 'bg-base-100'}`}
+                  >
+                    <UserCard user={user}/>
+                  </button>
+                )
               })
             }
             </div>
@@ -56,7 +67,7 @@ const Home = () => {
             {
               selectedUser ?
               (
-                <div></div>
+                <ChatBox />
               )
               :
               (

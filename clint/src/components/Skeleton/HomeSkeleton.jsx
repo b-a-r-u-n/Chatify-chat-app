@@ -1,3 +1,4 @@
+import { nanoid } from "@reduxjs/toolkit";
 import { MessageSquare, Users } from "lucide-react";
 import React from "react";
 
@@ -22,7 +23,7 @@ const HomeSkeleton = () => {
             <div className="overflow-hidden">
               {Array.from(Array(10), () => {
                 return (
-                  <div className="user-card skeleton bg-base-200">
+                  <div key={nanoid()} className="user-card skeleton bg-base-200">
                     <div className="user-card-image">
                       <div className="skeleton h-[3rem] w-[3rem] rounded-full"></div>
                     </div>

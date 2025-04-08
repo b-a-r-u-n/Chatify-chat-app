@@ -19,10 +19,52 @@ export const getAllUsers = createAsyncThunk('getAllUsers', async (__DO_NOT_USE__
         return data;
         
     } catch (error) {
-        
+        console.log(error);
     }
 })
 
+export const getMessages = createAsyncThunk('getMessages', async (userId, {rejectWithValue}) => {
+    try {
+        const responce = await fetch(`${import.meta.env.VITE_BASE_URL}/message/${userId}`, {
+            method: 'GET',
+            credentials: 'include',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        const data = await responce.json();
+        // console.log(data);
+        if(!data.success){
+            toast.error(data.message || "Request failed");
+            throw new Error(data.message || "Request failed");
+        }
+
+        return data;
+    } catch (error) {
+        console.log(error);
+    }
+})
+
+export const sendMessage = createAsyncThunk('sendMessage', async ({userId, formData}, {rejectWithValue}) => {
+    try {
+        console.log(formData);
+        
+        const responce = await fetch(`${import.meta.env.VITE_BASE_URL}/message/send/${userId}`, {
+            method: 'POST',
+            credentials: 'include',
+            body: formData
+        })
+        const data = await responce.json();
+        console.log(data);
+        if(!data.success){
+            toast.error(data.message || "Request failed");
+            throw new Error(data.message || "Request failed");
+        }
+    } catch (error) {
+        console.log(error?.message || error);
+    }
+})
+ 
 const initialState = {
     messages: [],
     users: [],
@@ -34,7 +76,11 @@ const initialState = {
 const messageSlice = createSlice({
     initialState,
     name: 'message',
-    reducers:{},
+    reducers:{
+        selectUser: (state, action) => {
+            state.selectedUser = action.payload;            
+        }
+    },
     extraReducers: (builder) => {
         // get users
         builder.addCase(getAllUsers.pending, (state, action) => {
@@ -49,8 +95,21 @@ const messageSlice = createSlice({
             state.isUserLoading = false;
             // toast.error(_.error.message || "Something went wrong while fetching users");
         })
+
+        //get Messages
+        builder.addCase(getMessages.pending, (state, _) => {
+            state.isMessageLoading = true;
+        })
+        builder.addCase(getMessages.fulfilled, (state, action) => {
+            if(action.payload?.success === 'true' || action.payload?.success === true)
+                state.messages = action.payload?.data || null;
+            state.isMessageLoading = false;
+        })
+        builder.addCase(getMessages.rejected, (state, ) => {
+            state.isMessageLoading = false;
+        })
     }
 })
 
-export const {} = messageSlice.actions;
+export const {selectUser} = messageSlice.actions;
 export default messageSlice.reducer;
